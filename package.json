@@ -1,0 +1,36 @@
+{
+  "name": "mock-yaml-extension",
+  "displayName": "mock-yaml-extension",
+  "publisher": "adarji",
+  "description": "Mock YAML Server schema validation extension for VS Code",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhijitdarji/mock-yaml-extension.git"
+  },
+  "version": "1.0.1",
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "icon": "resources/icon.png",
+  "main": "./extension.js",
+  "categories": [
+    "Other"
+  ],
+  "extensionDependencies": [
+    "redhat.vscode-yaml"
+  ],
+  "activationEvents": [
+    "onLanguage:yaml"
+  ],
+  "contributes": {
+    "yamlValidation": [
+      {
+        "fileMatch": [
+          "*.mock.yaml",
+          "*.mock.yml"
+        ],
+        "url": "./schema.json"
+      }
+    ]
+  }
+}
