@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/abhijitdarji/mock-yaml-extension.git"
   },
-  "version": "1.0.2",
+  "version": "1.0.3",
   "engines": {
     "vscode": "^1.83.0"
   },

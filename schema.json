@@ -1,1374 +1,1295 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "JSON Schema for mock-yaml-server",
-    "description": "Mock yaml server linter and validation tool",
-    "type": "object",
-    "additionalProperties": false,
-    "properties": {
-      "resource": {
-        "type": "string"
-      },
-      "headers": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "patternProperties": {
-            "^[A-Za-z0-9_]*$": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "cookies": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "value": {
-              "type": "string"
-            },
-            "options": {
-              "type": "object",
-              "properties": {
-                "domain": {
-                  "type": "string"
-                },
-                "path": {
-                  "type": "string"
-                },
-                "secure": {
-                  "type": "boolean"
-                },
-                "httpOnly": {
-                  "type": "boolean"
-                },
-                "expires": {
-                  "type": "string"
-                },
-                "maxAge": {
-                  "type": "string"
-                },
-                "sameSite": {
-                  "type": "boolean"
-                }
-              }
-            }
-          },
-          "required": ["name", "value"]
-        }
-      },
-      "seed": {
-        "type": "number"
-      },
-      "properties": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JSON Schema for mock-yaml-server",
+  "description": "Mock yaml server linter and validation tool",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "resource": {
+      "type": "string"
+    },
+    "headers": {
+      "type": "array",
+      "items": {
         "type": "object",
         "patternProperties": {
           "^[A-Za-z0-9_]*$": {
-            "$ref": "#/definitions/patternSchema"
+            "type": "string"
           }
         }
       }
     },
-    "required": ["resource", "properties"],
-    "definitions": {
-      "patternSchema": {
+    "cookies": {
+      "type": "array",
+      "items": {
         "type": "object",
         "properties": {
-          "type": {
-            "type": "string",
-            "oneOf": [
-              {
-                "const": "compose",
-                "description": "Build string using multiple faker methods"
-              },
-              {
-                "const": "json",
-                "description": "JSON object"
-              },
-              {
-                "const": "array",
-                "description": "Array of objects"
-              },
-              {
-                "const": "eval",
-                "description": "Evaluate JavaScript block"
-              },
-              {
-                "const": "object",
-                "description": "Nested object"
-              },
-              {
-                "$ref": "#/definitions/fakerTypes"
-              }
-            ]
-          },
-          "input": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "object"
-              },
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "anyOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "$ref": "#/definitions/fakerProp"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "options": {
-            "$ref": "#/definitions/optionsType"
-          },
-          "items": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/propertiesSchema"
-                },
-                {
-                  "$ref": "#/definitions/fakerProp"
-                },
-                {
-                  "$ref": "#/definitions/patternSchema"
-                }
-              ]
-            }
-          },
-          "count": {
-            "type": "number"
-          },
-          "properties": {
-            "type": "object",
-            "patternProperties": {
-              "^[A-Za-z0-9_]*$": {
-                "$ref": "#/definitions/patternSchema"
-              }
-            }
-          }
-        },
-        "required": ["type"]
-      },
-      "propertiesSchema": {
-        "type": "object",
-        "properties": {
-          "properties": {
-            "type": "object",
-            "patternProperties": {
-              "^[A-Za-z0-9_]*$": {
-                "$ref": "#/definitions/patternSchema"
-              }
-            }
-          },
-          "count": {
-            "type": "number"
-          }
-        },
-        "required": ["properties"]
-      },
-      "optionsType": {
-        "anyOf": [
-          {
-            "type": "number"
-          },
-          {
+          "name": {
             "type": "string"
           },
-          {
-            "type": "boolean"
-          },
-          {
-            "type": "object"
-          }
-        ]
-      },
-      "fakerProp": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "oneOf": [
-              {
-                "$ref": "#/definitions/fakerTypes"
-              }
-            ]
+          "value": {
+            "type": "string"
           },
           "options": {
-            "$ref": "#/definitions/optionsType"
+            "type": "object",
+            "properties": {
+              "domain": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "secure": {
+                "type": "boolean"
+              },
+              "httpOnly": {
+                "type": "boolean"
+              },
+              "expires": {
+                "type": "string"
+              },
+              "maxAge": {
+                "type": "string"
+              },
+              "sameSite": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      }
+    },
+    "seed": {
+      "type": "number"
+    },
+    "properties": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Za-z0-9_]*$": {
+          "$ref": "#/definitions/patternSchema"
+        }
+      }
+    }
+  },
+  "required": [
+    "resource",
+    "properties"
+  ],
+  "definitions": {
+    "patternSchema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "oneOf": [
+            {
+              "const": "compose",
+              "description": "Build string using multiple faker methods"
+            },
+            {
+              "const": "json",
+              "description": "JSON object"
+            },
+            {
+              "const": "array",
+              "description": "Array of objects"
+            },
+            {
+              "const": "eval",
+              "description": "Evaluate JavaScript block"
+            },
+            {
+              "const": "object",
+              "description": "Nested object"
+            },
+            {
+              "$ref": "#/definitions/fakerTypes"
+            }
+          ]
+        },
+        "input": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "#/definitions/fakerProp"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {
+          "$ref": "#/definitions/optionsType"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/propertiesSchema"
+              },
+              {
+                "$ref": "#/definitions/fakerProp"
+              },
+              {
+                "$ref": "#/definitions/patternSchema"
+              }
+            ]
+          }
+        },
+        "count": {
+          "type": "number"
+        },
+        "properties": {
+          "type": "object",
+          "patternProperties": {
+            "^[A-Za-z0-9_]*$": {
+              "$ref": "#/definitions/patternSchema"
+            }
           }
         }
       },
-      "fakerTypes": {
-        "type": "string",
-        "oneOf": [
-          {
-            "const": "random.word",
-            "description": "Ref: https://v8.fakerjs.dev/api/random.html#word"
-          },
-          {
-            "const": "random.words",
-            "description": "Ref: https://v8.fakerjs.dev/api/random.html#words"
-          },
-          {
-            "const": "random.locale",
-            "description": "Ref: https://v8.fakerjs.dev/api/random.html#locale"
-          },
-          {
-            "const": "random.alpha",
-            "description": "Ref: https://v8.fakerjs.dev/api/random.html#alpha"
-          },
-          {
-            "const": "random.alphaNumeric",
-            "description": "Ref: https://v8.fakerjs.dev/api/random.html#alphanumeric"
-          },
-          {
-            "const": "random.numeric",
-            "description": "Ref: https://v8.fakerjs.dev/api/random.html#numeric"
-          },
-          {
-            "const": "helpers.uniqueStore",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#uniquestore"
-          },
-          {
-            "const": "helpers.slugify",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#slugify"
-          },
-          {
-            "const": "helpers.replaceSymbolWithNumber",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#replacesymbolwithnumber"
-          },
-          {
-            "const": "helpers.replaceSymbols",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#replacesymbols"
-          },
-          {
-            "const": "helpers.replaceCreditCardSymbols",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#replacecreditcardsymbols"
-          },
-          {
-            "const": "helpers.regexpStyleStringParse",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#regexpstylestringparse"
-          },
-          {
-            "const": "helpers.fromRegExp",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#fromregexp"
-          },
-          {
-            "const": "helpers.shuffle",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#shuffle"
-          },
-          {
-            "const": "helpers.uniqueArray",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#uniquearray"
-          },
-          {
-            "const": "helpers.mustache",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#mustache"
-          },
-          {
-            "const": "helpers.maybe",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#maybe"
-          },
-          {
-            "const": "helpers.objectKey",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#objectkey"
-          },
-          {
-            "const": "helpers.objectValue",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#objectvalue"
-          },
-          {
-            "const": "helpers.objectEntry",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#objectentry"
-          },
-          {
-            "const": "helpers.arrayElement",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#arrayelement"
-          },
-          {
-            "const": "helpers.weightedArrayElement",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#weightedarrayelement"
-          },
-          {
-            "const": "helpers.arrayElements",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#arrayelements"
-          },
-          {
-            "const": "helpers.enumValue",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#enumvalue"
-          },
-          {
-            "const": "helpers.fake",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#fake"
-          },
-          {
-            "const": "helpers.rangeToNumber",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#rangetonumber"
-          },
-          {
-            "const": "helpers.unique",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#unique"
-          },
-          {
-            "const": "helpers.multiple",
-            "description": "Ref: https://v8.fakerjs.dev/api/helpers.html#multiple"
-          },
-          {
-            "const": "datatype.number",
-            "description": "Ref: https://v8.fakerjs.dev/api/datatype.html#number"
-          },
-          {
-            "const": "datatype.float",
-            "description": "Ref: https://v8.fakerjs.dev/api/datatype.html#float"
-          },
-          {
-            "const": "datatype.datetime",
-            "description": "Ref: https://v8.fakerjs.dev/api/datatype.html#datetime"
-          },
-          {
-            "const": "datatype.string",
-            "description": "Ref: https://v8.fakerjs.dev/api/datatype.html#string"
-          },
-          {
-            "const": "datatype.uuid",
-            "description": "Ref: https://v8.fakerjs.dev/api/datatype.html#uuid"
-          },
-          {
-            "const": "datatype.boolean",
-            "description": "Ref: https://v8.fakerjs.dev/api/datatype.html#boolean"
-          },
-          {
-            "const": "datatype.hexadecimal",
-            "description": "Ref: https://v8.fakerjs.dev/api/datatype.html#hexadecimal"
-          },
-          {
-            "const": "datatype.json",
-            "description": "Ref: https://v8.fakerjs.dev/api/datatype.html#json"
-          },
-          {
-            "const": "datatype.array",
-            "description": "Ref: https://v8.fakerjs.dev/api/datatype.html#array"
-          },
-          {
-            "const": "datatype.bigInt",
-            "description": "Ref: https://v8.fakerjs.dev/api/datatype.html#bigint"
-          },
-          {
-            "const": "airline.airport",
-            "description": "Ref: https://v8.fakerjs.dev/api/airline.html#airport"
-          },
-          {
-            "const": "airline.airline",
-            "description": "Ref: https://v8.fakerjs.dev/api/airline.html#airline"
-          },
-          {
-            "const": "airline.airplane",
-            "description": "Ref: https://v8.fakerjs.dev/api/airline.html#airplane"
-          },
-          {
-            "const": "airline.recordLocator",
-            "description": "Ref: https://v8.fakerjs.dev/api/airline.html#recordlocator"
-          },
-          {
-            "const": "airline.seat",
-            "description": "Ref: https://v8.fakerjs.dev/api/airline.html#seat"
-          },
-          {
-            "const": "airline.aircraftType",
-            "description": "Ref: https://v8.fakerjs.dev/api/airline.html#aircrafttype"
-          },
-          {
-            "const": "airline.flightNumber",
-            "description": "Ref: https://v8.fakerjs.dev/api/airline.html#flightnumber"
-          },
-          {
-            "const": "animal.dog",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#dog"
-          },
-          {
-            "const": "animal.cat",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#cat"
-          },
-          {
-            "const": "animal.snake",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#snake"
-          },
-          {
-            "const": "animal.bear",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#bear"
-          },
-          {
-            "const": "animal.lion",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#lion"
-          },
-          {
-            "const": "animal.cetacean",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#cetacean"
-          },
-          {
-            "const": "animal.horse",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#horse"
-          },
-          {
-            "const": "animal.bird",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#bird"
-          },
-          {
-            "const": "animal.cow",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#cow"
-          },
-          {
-            "const": "animal.fish",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#fish"
-          },
-          {
-            "const": "animal.crocodilia",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#crocodilia"
-          },
-          {
-            "const": "animal.insect",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#insect"
-          },
-          {
-            "const": "animal.rabbit",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#rabbit"
-          },
-          {
-            "const": "animal.rodent",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#rodent"
-          },
-          {
-            "const": "animal.type",
-            "description": "Ref: https://v8.fakerjs.dev/api/animal.html#type"
-          },
-          {
-            "const": "color.human",
-            "description": "Ref: https://v8.fakerjs.dev/api/color.html#human"
-          },
-          {
-            "const": "color.space",
-            "description": "Ref: https://v8.fakerjs.dev/api/color.html#space"
-          },
-          {
-            "const": "color.cssSupportedFunction",
-            "description": "Ref: https://v8.fakerjs.dev/api/color.html#csssupportedfunction"
-          },
-          {
-            "const": "color.cssSupportedSpace",
-            "description": "Ref: https://v8.fakerjs.dev/api/color.html#csssupportedspace"
-          },
-          {
-            "const": "color.rgb",
-            "description": "Ref: https://v8.fakerjs.dev/api/color.html#rgb"
-          },
-          {
-            "const": "color.cmyk",
-            "description": "Ref: https://v8.fakerjs.dev/api/color.html#cmyk"
-          },
-          {
-            "const": "color.hsl",
-            "description": "Ref: https://v8.fakerjs.dev/api/color.html#hsl"
-          },
-          {
-            "const": "color.hwb",
-            "description": "Ref: https://v8.fakerjs.dev/api/color.html#hwb"
-          },
-          {
-            "const": "color.lab",
-            "description": "Ref: https://v8.fakerjs.dev/api/color.html#lab"
-          },
-          {
-            "const": "color.lch",
-            "description": "Ref: https://v8.fakerjs.dev/api/color.html#lch"
-          },
-          {
-            "const": "color.colorByCSSColorSpace",
-            "description": "Ref: https://v8.fakerjs.dev/api/color.html#colorbycsscolorspace"
-          },
-          {
-            "const": "commerce.department",
-            "description": "Ref: https://v8.fakerjs.dev/api/commerce.html#department"
-          },
-          {
-            "const": "commerce.productName",
-            "description": "Ref: https://v8.fakerjs.dev/api/commerce.html#productname"
-          },
-          {
-            "const": "commerce.price",
-            "description": "Ref: https://v8.fakerjs.dev/api/commerce.html#price"
-          },
-          {
-            "const": "commerce.productAdjective",
-            "description": "Ref: https://v8.fakerjs.dev/api/commerce.html#productadjective"
-          },
-          {
-            "const": "commerce.productMaterial",
-            "description": "Ref: https://v8.fakerjs.dev/api/commerce.html#productmaterial"
-          },
-          {
-            "const": "commerce.product",
-            "description": "Ref: https://v8.fakerjs.dev/api/commerce.html#product"
-          },
-          {
-            "const": "commerce.productDescription",
-            "description": "Ref: https://v8.fakerjs.dev/api/commerce.html#productdescription"
-          },
-          {
-            "const": "company.suffixes",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#suffixes"
-          },
-          {
-            "const": "company.name",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#name"
-          },
-          {
-            "const": "company.companySuffix",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#companysuffix"
-          },
-          {
-            "const": "company.catchPhrase",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#catchphrase"
-          },
-          {
-            "const": "company.bs",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#bs"
-          },
-          {
-            "const": "company.buzzPhrase",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#buzzphrase"
-          },
-          {
-            "const": "company.catchPhraseAdjective",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#catchphraseadjective"
-          },
-          {
-            "const": "company.catchPhraseDescriptor",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#catchphrasedescriptor"
-          },
-          {
-            "const": "company.catchPhraseNoun",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#catchphrasenoun"
-          },
-          {
-            "const": "company.bsAdjective",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#bsadjective"
-          },
-          {
-            "const": "company.buzzAdjective",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#buzzadjective"
-          },
-          {
-            "const": "company.bsBuzz",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#bsbuzz"
-          },
-          {
-            "const": "company.buzzVerb",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#buzzverb"
-          },
-          {
-            "const": "company.bsNoun",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#bsnoun"
-          },
-          {
-            "const": "company.buzzNoun",
-            "description": "Ref: https://v8.fakerjs.dev/api/company.html#buzznoun"
-          },
-          {
-            "const": "database.column",
-            "description": "Ref: https://v8.fakerjs.dev/api/database.html#column"
-          },
-          {
-            "const": "database.type",
-            "description": "Ref: https://v8.fakerjs.dev/api/database.html#type"
-          },
-          {
-            "const": "database.collation",
-            "description": "Ref: https://v8.fakerjs.dev/api/database.html#collation"
-          },
-          {
-            "const": "database.engine",
-            "description": "Ref: https://v8.fakerjs.dev/api/database.html#engine"
-          },
-          {
-            "const": "database.mongodbObjectId",
-            "description": "Ref: https://v8.fakerjs.dev/api/database.html#mongodbobjectid"
-          },
-          {
-            "const": "date.anytime",
-            "description": "Ref: https://v8.fakerjs.dev/api/date.html#anytime"
-          },
-          {
-            "const": "date.past",
-            "description": "Ref: https://v8.fakerjs.dev/api/date.html#past"
-          },
-          {
-            "const": "date.future",
-            "description": "Ref: https://v8.fakerjs.dev/api/date.html#future"
-          },
-          {
-            "const": "date.between",
-            "description": "Ref: https://v8.fakerjs.dev/api/date.html#between"
-          },
-          {
-            "const": "date.betweens",
-            "description": "Ref: https://v8.fakerjs.dev/api/date.html#betweens"
-          },
-          {
-            "const": "date.recent",
-            "description": "Ref: https://v8.fakerjs.dev/api/date.html#recent"
-          },
-          {
-            "const": "date.soon",
-            "description": "Ref: https://v8.fakerjs.dev/api/date.html#soon"
-          },
-          {
-            "const": "date.month",
-            "description": "Ref: https://v8.fakerjs.dev/api/date.html#month"
-          },
-          {
-            "const": "date.weekday",
-            "description": "Ref: https://v8.fakerjs.dev/api/date.html#weekday"
-          },
-          {
-            "const": "date.birthdate",
-            "description": "Ref: https://v8.fakerjs.dev/api/date.html#birthdate"
-          },
-          {
-            "const": "finance.account",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#account"
-          },
-          {
-            "const": "finance.accountNumber",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#accountnumber"
-          },
-          {
-            "const": "finance.accountName",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#accountname"
-          },
-          {
-            "const": "finance.routingNumber",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#routingnumber"
-          },
-          {
-            "const": "finance.mask",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#mask"
-          },
-          {
-            "const": "finance.maskedNumber",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#maskednumber"
-          },
-          {
-            "const": "finance.amount",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#amount"
-          },
-          {
-            "const": "finance.transactionType",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#transactiontype"
-          },
-          {
-            "const": "finance.currency",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#currency"
-          },
-          {
-            "const": "finance.currencyCode",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#currencycode"
-          },
-          {
-            "const": "finance.currencyName",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#currencyname"
-          },
-          {
-            "const": "finance.currencySymbol",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#currencysymbol"
-          },
-          {
-            "const": "finance.bitcoinAddress",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#bitcoinaddress"
-          },
-          {
-            "const": "finance.litecoinAddress",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#litecoinaddress"
-          },
-          {
-            "const": "finance.creditCardNumber",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#creditcardnumber"
-          },
-          {
-            "const": "finance.creditCardCVV",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#creditcardcvv"
-          },
-          {
-            "const": "finance.creditCardIssuer",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#creditcardissuer"
-          },
-          {
-            "const": "finance.pin",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#pin"
-          },
-          {
-            "const": "finance.ethereumAddress",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#ethereumaddress"
-          },
-          {
-            "const": "finance.iban",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#iban"
-          },
-          {
-            "const": "finance.bic",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#bic"
-          },
-          {
-            "const": "finance.transactionDescription",
-            "description": "Ref: https://v8.fakerjs.dev/api/finance.html#transactiondescription"
-          },
-          {
-            "const": "git.branch",
-            "description": "Ref: https://v8.fakerjs.dev/api/git.html#branch"
-          },
-          {
-            "const": "git.commitEntry",
-            "description": "Ref: https://v8.fakerjs.dev/api/git.html#commitentry"
-          },
-          {
-            "const": "git.commitMessage",
-            "description": "Ref: https://v8.fakerjs.dev/api/git.html#commitmessage"
-          },
-          {
-            "const": "git.commitDate",
-            "description": "Ref: https://v8.fakerjs.dev/api/git.html#commitdate"
-          },
-          {
-            "const": "git.commitSha",
-            "description": "Ref: https://v8.fakerjs.dev/api/git.html#commitsha"
-          },
-          {
-            "const": "git.shortSha",
-            "description": "Ref: https://v8.fakerjs.dev/api/git.html#shortsha"
-          },
-          {
-            "const": "hacker.abbreviation",
-            "description": "Ref: https://v8.fakerjs.dev/api/hacker.html#abbreviation"
-          },
-          {
-            "const": "hacker.adjective",
-            "description": "Ref: https://v8.fakerjs.dev/api/hacker.html#adjective"
-          },
-          {
-            "const": "hacker.noun",
-            "description": "Ref: https://v8.fakerjs.dev/api/hacker.html#noun"
-          },
-          {
-            "const": "hacker.verb",
-            "description": "Ref: https://v8.fakerjs.dev/api/hacker.html#verb"
-          },
-          {
-            "const": "hacker.ingverb",
-            "description": "Ref: https://v8.fakerjs.dev/api/hacker.html#ingverb"
-          },
-          {
-            "const": "hacker.phrase",
-            "description": "Ref: https://v8.fakerjs.dev/api/hacker.html#phrase"
-          },
-          {
-            "const": "image.avatar",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#avatar"
-          },
-          {
-            "const": "image.avatarGitHub",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#avatargithub"
-          },
-          {
-            "const": "image.avatarLegacy",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#avatarlegacy"
-          },
-          {
-            "const": "image.url",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#url"
-          },
-          {
-            "const": "image.urlLoremFlickr",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#urlloremflickr"
-          },
-          {
-            "const": "image.urlPicsumPhotos",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#urlpicsumphotos"
-          },
-          {
-            "const": "image.urlPlaceholder",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#urlplaceholder"
-          },
-          {
-            "const": "image.dataUri",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#datauri"
-          },
-          {
-            "const": "image.image",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#image"
-          },
-          {
-            "const": "image.imageUrl",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#imageurl"
-          },
-          {
-            "const": "image.abstract",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#abstract"
-          },
-          {
-            "const": "image.animals",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#animals"
-          },
-          {
-            "const": "image.business",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#business"
-          },
-          {
-            "const": "image.cats",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#cats"
-          },
-          {
-            "const": "image.city",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#city"
-          },
-          {
-            "const": "image.food",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#food"
-          },
-          {
-            "const": "image.nightlife",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#nightlife"
-          },
-          {
-            "const": "image.fashion",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#fashion"
-          },
-          {
-            "const": "image.people",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#people"
-          },
-          {
-            "const": "image.nature",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#nature"
-          },
-          {
-            "const": "image.sports",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#sports"
-          },
-          {
-            "const": "image.technics",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#technics"
-          },
-          {
-            "const": "image.transport",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#transport"
-          },
-          {
-            "const": "image.unsplash",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#unsplash"
-          },
-          {
-            "const": "image.lorempicsum",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#lorempicsum"
-          },
-          {
-            "const": "image.placeholder",
-            "description": "Ref: https://v8.fakerjs.dev/api/image.html#placeholder"
-          },
-          {
-            "const": "internet.avatar",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#avatar"
-          },
-          {
-            "const": "internet.email",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#email"
-          },
-          {
-            "const": "internet.exampleEmail",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#exampleemail"
-          },
-          {
-            "const": "internet.userName",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#username"
-          },
-          {
-            "const": "internet.displayName",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#displayname"
-          },
-          {
-            "const": "internet.protocol",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#protocol"
-          },
-          {
-            "const": "internet.httpMethod",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#httpmethod"
-          },
-          {
-            "const": "internet.httpStatusCode",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#httpstatuscode"
-          },
-          {
-            "const": "internet.url",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#url"
-          },
-          {
-            "const": "internet.domainName",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#domainname"
-          },
-          {
-            "const": "internet.domainSuffix",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#domainsuffix"
-          },
-          {
-            "const": "internet.domainWord",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#domainword"
-          },
-          {
-            "const": "internet.ip",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#ip"
-          },
-          {
-            "const": "internet.ipv4",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#ipv4"
-          },
-          {
-            "const": "internet.ipv6",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#ipv6"
-          },
-          {
-            "const": "internet.port",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#port"
-          },
-          {
-            "const": "internet.userAgent",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#useragent"
-          },
-          {
-            "const": "internet.color",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#color"
-          },
-          {
-            "const": "internet.mac",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#mac"
-          },
-          {
-            "const": "internet.password",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#password"
-          },
-          {
-            "const": "internet.emoji",
-            "description": "Ref: https://v8.fakerjs.dev/api/internet.html#emoji"
-          },
-          {
-            "const": "location.zipCode",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#zipcode"
-          },
-          {
-            "const": "location.zipCodeByState",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#zipcodebystate"
-          },
-          {
-            "const": "location.city",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#city"
-          },
-          {
-            "const": "location.cityName",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#cityname"
-          },
-          {
-            "const": "location.buildingNumber",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#buildingnumber"
-          },
-          {
-            "const": "location.street",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#street"
-          },
-          {
-            "const": "location.streetName",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#streetname"
-          },
-          {
-            "const": "location.streetAddress",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#streetaddress"
-          },
-          {
-            "const": "location.secondaryAddress",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#secondaryaddress"
-          },
-          {
-            "const": "location.county",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#county"
-          },
-          {
-            "const": "location.country",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#country"
-          },
-          {
-            "const": "location.countryCode",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#countrycode"
-          },
-          {
-            "const": "location.state",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#state"
-          },
-          {
-            "const": "location.stateAbbr",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#stateabbr"
-          },
-          {
-            "const": "location.latitude",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#latitude"
-          },
-          {
-            "const": "location.longitude",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#longitude"
-          },
-          {
-            "const": "location.direction",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#direction"
-          },
-          {
-            "const": "location.cardinalDirection",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#cardinaldirection"
-          },
-          {
-            "const": "location.ordinalDirection",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#ordinaldirection"
-          },
-          {
-            "const": "location.nearbyGPSCoordinate",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#nearbygpscoordinate"
-          },
-          {
-            "const": "location.timeZone",
-            "description": "Ref: https://v8.fakerjs.dev/api/location.html#timezone"
-          },
-          {
-            "const": "lorem.word",
-            "description": "Ref: https://v8.fakerjs.dev/api/lorem.html#word"
-          },
-          {
-            "const": "lorem.words",
-            "description": "Ref: https://v8.fakerjs.dev/api/lorem.html#words"
-          },
-          {
-            "const": "lorem.sentence",
-            "description": "Ref: https://v8.fakerjs.dev/api/lorem.html#sentence"
-          },
-          {
-            "const": "lorem.slug",
-            "description": "Ref: https://v8.fakerjs.dev/api/lorem.html#slug"
-          },
-          {
-            "const": "lorem.sentences",
-            "description": "Ref: https://v8.fakerjs.dev/api/lorem.html#sentences"
-          },
-          {
-            "const": "lorem.paragraph",
-            "description": "Ref: https://v8.fakerjs.dev/api/lorem.html#paragraph"
-          },
-          {
-            "const": "lorem.paragraphs",
-            "description": "Ref: https://v8.fakerjs.dev/api/lorem.html#paragraphs"
-          },
-          {
-            "const": "lorem.text",
-            "description": "Ref: https://v8.fakerjs.dev/api/lorem.html#text"
-          },
-          {
-            "const": "lorem.lines",
-            "description": "Ref: https://v8.fakerjs.dev/api/lorem.html#lines"
-          },
-          {
-            "const": "music.genre",
-            "description": "Ref: https://v8.fakerjs.dev/api/music.html#genre"
-          },
-          {
-            "const": "music.songName",
-            "description": "Ref: https://v8.fakerjs.dev/api/music.html#songname"
-          },
-          {
-            "const": "person.firstName",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#firstname"
-          },
-          {
-            "const": "person.lastName",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#lastname"
-          },
-          {
-            "const": "person.middleName",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#middlename"
-          },
-          {
-            "const": "person.fullName",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#fullname"
-          },
-          {
-            "const": "person.gender",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#gender"
-          },
-          {
-            "const": "person.sex",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#sex"
-          },
-          {
-            "const": "person.sexType",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#sextype"
-          },
-          {
-            "const": "person.bio",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#bio"
-          },
-          {
-            "const": "person.prefix",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#prefix"
-          },
-          {
-            "const": "person.suffix",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#suffix"
-          },
-          {
-            "const": "person.jobTitle",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#jobtitle"
-          },
-          {
-            "const": "person.jobDescriptor",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#jobdescriptor"
-          },
-          {
-            "const": "person.jobArea",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#jobarea"
-          },
-          {
-            "const": "person.jobType",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#jobtype"
-          },
-          {
-            "const": "person.zodiacSign",
-            "description": "Ref: https://v8.fakerjs.dev/api/person.html#zodiacsign"
-          },
-          {
-            "const": "number.int",
-            "description": "Ref: https://v8.fakerjs.dev/api/number.html#int"
-          },
-          {
-            "const": "number.float",
-            "description": "Ref: https://v8.fakerjs.dev/api/number.html#float"
-          },
-          {
-            "const": "number.binary",
-            "description": "Ref: https://v8.fakerjs.dev/api/number.html#binary"
-          },
-          {
-            "const": "number.octal",
-            "description": "Ref: https://v8.fakerjs.dev/api/number.html#octal"
-          },
-          {
-            "const": "number.hex",
-            "description": "Ref: https://v8.fakerjs.dev/api/number.html#hex"
-          },
-          {
-            "const": "number.bigInt",
-            "description": "Ref: https://v8.fakerjs.dev/api/number.html#bigint"
-          },
-          {
-            "const": "phone.number",
-            "description": "Ref: https://v8.fakerjs.dev/api/phone.html#number"
-          },
-          {
-            "const": "phone.imei",
-            "description": "Ref: https://v8.fakerjs.dev/api/phone.html#imei"
-          },
-          {
-            "const": "science.chemicalElement",
-            "description": "Ref: https://v8.fakerjs.dev/api/science.html#chemicalelement"
-          },
-          {
-            "const": "science.unit",
-            "description": "Ref: https://v8.fakerjs.dev/api/science.html#unit"
-          },
-          {
-            "const": "string.fromCharacters",
-            "description": "Ref: https://v8.fakerjs.dev/api/string.html#fromcharacters"
-          },
-          {
-            "const": "string.alpha",
-            "description": "Ref: https://v8.fakerjs.dev/api/string.html#alpha"
-          },
-          {
-            "const": "string.alphanumeric",
-            "description": "Ref: https://v8.fakerjs.dev/api/string.html#alphanumeric"
-          },
-          {
-            "const": "string.binary",
-            "description": "Ref: https://v8.fakerjs.dev/api/string.html#binary"
-          },
-          {
-            "const": "string.octal",
-            "description": "Ref: https://v8.fakerjs.dev/api/string.html#octal"
-          },
-          {
-            "const": "string.hexadecimal",
-            "description": "Ref: https://v8.fakerjs.dev/api/string.html#hexadecimal"
-          },
-          {
-            "const": "string.numeric",
-            "description": "Ref: https://v8.fakerjs.dev/api/string.html#numeric"
-          },
-          {
-            "const": "string.sample",
-            "description": "Ref: https://v8.fakerjs.dev/api/string.html#sample"
-          },
-          {
-            "const": "string.uuid",
-            "description": "Ref: https://v8.fakerjs.dev/api/string.html#uuid"
-          },
-          {
-            "const": "string.nanoid",
-            "description": "Ref: https://v8.fakerjs.dev/api/string.html#nanoid"
-          },
-          {
-            "const": "string.symbol",
-            "description": "Ref: https://v8.fakerjs.dev/api/string.html#symbol"
-          },
-          {
-            "const": "system.fileName",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#filename"
-          },
-          {
-            "const": "system.commonFileName",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#commonfilename"
-          },
-          {
-            "const": "system.mimeType",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#mimetype"
-          },
-          {
-            "const": "system.commonFileType",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#commonfiletype"
-          },
-          {
-            "const": "system.commonFileExt",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#commonfileext"
-          },
-          {
-            "const": "system.fileType",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#filetype"
-          },
-          {
-            "const": "system.fileExt",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#fileext"
-          },
-          {
-            "const": "system.directoryPath",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#directorypath"
-          },
-          {
-            "const": "system.filePath",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#filepath"
-          },
-          {
-            "const": "system.semver",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#semver"
-          },
-          {
-            "const": "system.networkInterface",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#networkinterface"
-          },
-          {
-            "const": "system.cron",
-            "description": "Ref: https://v8.fakerjs.dev/api/system.html#cron"
-          },
-          {
-            "const": "vehicle.vehicle",
-            "description": "Ref: https://v8.fakerjs.dev/api/vehicle.html#vehicle"
-          },
-          {
-            "const": "vehicle.manufacturer",
-            "description": "Ref: https://v8.fakerjs.dev/api/vehicle.html#manufacturer"
-          },
-          {
-            "const": "vehicle.model",
-            "description": "Ref: https://v8.fakerjs.dev/api/vehicle.html#model"
-          },
-          {
-            "const": "vehicle.type",
-            "description": "Ref: https://v8.fakerjs.dev/api/vehicle.html#type"
-          },
-          {
-            "const": "vehicle.fuel",
-            "description": "Ref: https://v8.fakerjs.dev/api/vehicle.html#fuel"
-          },
-          {
-            "const": "vehicle.vin",
-            "description": "Ref: https://v8.fakerjs.dev/api/vehicle.html#vin"
-          },
-          {
-            "const": "vehicle.color",
-            "description": "Ref: https://v8.fakerjs.dev/api/vehicle.html#color"
-          },
-          {
-            "const": "vehicle.vrm",
-            "description": "Ref: https://v8.fakerjs.dev/api/vehicle.html#vrm"
-          },
-          {
-            "const": "vehicle.bicycle",
-            "description": "Ref: https://v8.fakerjs.dev/api/vehicle.html#bicycle"
-          },
-          {
-            "const": "word.adjective",
-            "description": "Ref: https://v8.fakerjs.dev/api/word.html#adjective"
-          },
-          {
-            "const": "word.adverb",
-            "description": "Ref: https://v8.fakerjs.dev/api/word.html#adverb"
-          },
-          {
-            "const": "word.conjunction",
-            "description": "Ref: https://v8.fakerjs.dev/api/word.html#conjunction"
-          },
-          {
-            "const": "word.interjection",
-            "description": "Ref: https://v8.fakerjs.dev/api/word.html#interjection"
-          },
-          {
-            "const": "word.noun",
-            "description": "Ref: https://v8.fakerjs.dev/api/word.html#noun"
-          },
-          {
-            "const": "word.preposition",
-            "description": "Ref: https://v8.fakerjs.dev/api/word.html#preposition"
-          },
-          {
-            "const": "word.verb",
-            "description": "Ref: https://v8.fakerjs.dev/api/word.html#verb"
-          },
-          {
-            "const": "word.sample",
-            "description": "Ref: https://v8.fakerjs.dev/api/word.html#sample"
-          },
-          {
-            "const": "word.words",
-            "description": "Ref: https://v8.fakerjs.dev/api/word.html#words"
+      "required": [
+        "type"
+      ]
+    },
+    "propertiesSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "patternProperties": {
+            "^[A-Za-z0-9_]*$": {
+              "$ref": "#/definitions/patternSchema"
+            }
           }
-        ]
+        },
+        "count": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "optionsType": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "fakerProp": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/fakerTypes"
+            }
+          ]
+        },
+        "options": {
+          "$ref": "#/definitions/optionsType"
+        }
       }
+    },
+    "fakerTypes": {
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "datatype.boolean",
+          "description": "Ref: https://fakerjs.dev/api/datatype.html#boolean"
+        },
+        {
+          "const": "date.month",
+          "description": "Ref: https://fakerjs.dev/api/date.html#month"
+        },
+        {
+          "const": "date.weekday",
+          "description": "Ref: https://fakerjs.dev/api/date.html#weekday"
+        },
+        {
+          "const": "date.timeZone",
+          "description": "Ref: https://fakerjs.dev/api/date.html#timezone"
+        },
+        {
+          "const": "date.anytime",
+          "description": "Ref: https://fakerjs.dev/api/date.html#anytime"
+        },
+        {
+          "const": "date.past",
+          "description": "Ref: https://fakerjs.dev/api/date.html#past"
+        },
+        {
+          "const": "date.future",
+          "description": "Ref: https://fakerjs.dev/api/date.html#future"
+        },
+        {
+          "const": "date.between",
+          "description": "Ref: https://fakerjs.dev/api/date.html#between"
+        },
+        {
+          "const": "date.betweens",
+          "description": "Ref: https://fakerjs.dev/api/date.html#betweens"
+        },
+        {
+          "const": "date.recent",
+          "description": "Ref: https://fakerjs.dev/api/date.html#recent"
+        },
+        {
+          "const": "date.soon",
+          "description": "Ref: https://fakerjs.dev/api/date.html#soon"
+        },
+        {
+          "const": "date.birthdate",
+          "description": "Ref: https://fakerjs.dev/api/date.html#birthdate"
+        },
+        {
+          "const": "helpers.fake",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#fake"
+        },
+        {
+          "const": "helpers.slugify",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#slugify"
+        },
+        {
+          "const": "helpers.replaceSymbols",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#replacesymbols"
+        },
+        {
+          "const": "helpers.replaceCreditCardSymbols",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#replacecreditcardsymbols"
+        },
+        {
+          "const": "helpers.fromRegExp",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#fromregexp"
+        },
+        {
+          "const": "helpers.shuffle",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#shuffle"
+        },
+        {
+          "const": "helpers.uniqueArray",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#uniquearray"
+        },
+        {
+          "const": "helpers.mustache",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#mustache"
+        },
+        {
+          "const": "helpers.maybe",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#maybe"
+        },
+        {
+          "const": "helpers.objectKey",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#objectkey"
+        },
+        {
+          "const": "helpers.objectValue",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#objectvalue"
+        },
+        {
+          "const": "helpers.objectEntry",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#objectentry"
+        },
+        {
+          "const": "helpers.arrayElement",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#arrayelement"
+        },
+        {
+          "const": "helpers.weightedArrayElement",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#weightedarrayelement"
+        },
+        {
+          "const": "helpers.arrayElements",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#arrayelements"
+        },
+        {
+          "const": "helpers.enumValue",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#enumvalue"
+        },
+        {
+          "const": "helpers.rangeToNumber",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#rangetonumber"
+        },
+        {
+          "const": "helpers.multiple",
+          "description": "Ref: https://fakerjs.dev/api/helpers.html#multiple"
+        },
+        {
+          "const": "location.zipCode",
+          "description": "Ref: https://fakerjs.dev/api/location.html#zipcode"
+        },
+        {
+          "const": "location.city",
+          "description": "Ref: https://fakerjs.dev/api/location.html#city"
+        },
+        {
+          "const": "location.buildingNumber",
+          "description": "Ref: https://fakerjs.dev/api/location.html#buildingnumber"
+        },
+        {
+          "const": "location.street",
+          "description": "Ref: https://fakerjs.dev/api/location.html#street"
+        },
+        {
+          "const": "location.streetAddress",
+          "description": "Ref: https://fakerjs.dev/api/location.html#streetaddress"
+        },
+        {
+          "const": "location.secondaryAddress",
+          "description": "Ref: https://fakerjs.dev/api/location.html#secondaryaddress"
+        },
+        {
+          "const": "location.county",
+          "description": "Ref: https://fakerjs.dev/api/location.html#county"
+        },
+        {
+          "const": "location.country",
+          "description": "Ref: https://fakerjs.dev/api/location.html#country"
+        },
+        {
+          "const": "location.continent",
+          "description": "Ref: https://fakerjs.dev/api/location.html#continent"
+        },
+        {
+          "const": "location.countryCode",
+          "description": "Ref: https://fakerjs.dev/api/location.html#countrycode"
+        },
+        {
+          "const": "location.state",
+          "description": "Ref: https://fakerjs.dev/api/location.html#state"
+        },
+        {
+          "const": "location.direction",
+          "description": "Ref: https://fakerjs.dev/api/location.html#direction"
+        },
+        {
+          "const": "location.cardinalDirection",
+          "description": "Ref: https://fakerjs.dev/api/location.html#cardinaldirection"
+        },
+        {
+          "const": "location.ordinalDirection",
+          "description": "Ref: https://fakerjs.dev/api/location.html#ordinaldirection"
+        },
+        {
+          "const": "location.timeZone",
+          "description": "Ref: https://fakerjs.dev/api/location.html#timezone"
+        },
+        {
+          "const": "location.language",
+          "description": "Ref: https://fakerjs.dev/api/location.html#language"
+        },
+        {
+          "const": "location.latitude",
+          "description": "Ref: https://fakerjs.dev/api/location.html#latitude"
+        },
+        {
+          "const": "location.longitude",
+          "description": "Ref: https://fakerjs.dev/api/location.html#longitude"
+        },
+        {
+          "const": "location.nearbyGPSCoordinate",
+          "description": "Ref: https://fakerjs.dev/api/location.html#nearbygpscoordinate"
+        },
+        {
+          "const": "number.int",
+          "description": "Ref: https://fakerjs.dev/api/number.html#int"
+        },
+        {
+          "const": "number.float",
+          "description": "Ref: https://fakerjs.dev/api/number.html#float"
+        },
+        {
+          "const": "number.binary",
+          "description": "Ref: https://fakerjs.dev/api/number.html#binary"
+        },
+        {
+          "const": "number.octal",
+          "description": "Ref: https://fakerjs.dev/api/number.html#octal"
+        },
+        {
+          "const": "number.hex",
+          "description": "Ref: https://fakerjs.dev/api/number.html#hex"
+        },
+        {
+          "const": "number.bigInt",
+          "description": "Ref: https://fakerjs.dev/api/number.html#bigint"
+        },
+        {
+          "const": "number.romanNumeral",
+          "description": "Ref: https://fakerjs.dev/api/number.html#romannumeral"
+        },
+        {
+          "const": "string.fromCharacters",
+          "description": "Ref: https://fakerjs.dev/api/string.html#fromcharacters"
+        },
+        {
+          "const": "string.alpha",
+          "description": "Ref: https://fakerjs.dev/api/string.html#alpha"
+        },
+        {
+          "const": "string.alphanumeric",
+          "description": "Ref: https://fakerjs.dev/api/string.html#alphanumeric"
+        },
+        {
+          "const": "string.binary",
+          "description": "Ref: https://fakerjs.dev/api/string.html#binary"
+        },
+        {
+          "const": "string.octal",
+          "description": "Ref: https://fakerjs.dev/api/string.html#octal"
+        },
+        {
+          "const": "string.hexadecimal",
+          "description": "Ref: https://fakerjs.dev/api/string.html#hexadecimal"
+        },
+        {
+          "const": "string.numeric",
+          "description": "Ref: https://fakerjs.dev/api/string.html#numeric"
+        },
+        {
+          "const": "string.sample",
+          "description": "Ref: https://fakerjs.dev/api/string.html#sample"
+        },
+        {
+          "const": "string.uuid",
+          "description": "Ref: https://fakerjs.dev/api/string.html#uuid"
+        },
+        {
+          "const": "string.ulid",
+          "description": "Ref: https://fakerjs.dev/api/string.html#ulid"
+        },
+        {
+          "const": "string.nanoid",
+          "description": "Ref: https://fakerjs.dev/api/string.html#nanoid"
+        },
+        {
+          "const": "string.symbol",
+          "description": "Ref: https://fakerjs.dev/api/string.html#symbol"
+        },
+        {
+          "const": "airline.airport",
+          "description": "Ref: https://fakerjs.dev/api/airline.html#airport"
+        },
+        {
+          "const": "airline.airline",
+          "description": "Ref: https://fakerjs.dev/api/airline.html#airline"
+        },
+        {
+          "const": "airline.airplane",
+          "description": "Ref: https://fakerjs.dev/api/airline.html#airplane"
+        },
+        {
+          "const": "airline.recordLocator",
+          "description": "Ref: https://fakerjs.dev/api/airline.html#recordlocator"
+        },
+        {
+          "const": "airline.seat",
+          "description": "Ref: https://fakerjs.dev/api/airline.html#seat"
+        },
+        {
+          "const": "airline.aircraftType",
+          "description": "Ref: https://fakerjs.dev/api/airline.html#aircrafttype"
+        },
+        {
+          "const": "airline.flightNumber",
+          "description": "Ref: https://fakerjs.dev/api/airline.html#flightnumber"
+        },
+        {
+          "const": "animal.dog",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#dog"
+        },
+        {
+          "const": "animal.cat",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#cat"
+        },
+        {
+          "const": "animal.snake",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#snake"
+        },
+        {
+          "const": "animal.bear",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#bear"
+        },
+        {
+          "const": "animal.lion",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#lion"
+        },
+        {
+          "const": "animal.cetacean",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#cetacean"
+        },
+        {
+          "const": "animal.horse",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#horse"
+        },
+        {
+          "const": "animal.bird",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#bird"
+        },
+        {
+          "const": "animal.cow",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#cow"
+        },
+        {
+          "const": "animal.fish",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#fish"
+        },
+        {
+          "const": "animal.crocodilia",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#crocodilia"
+        },
+        {
+          "const": "animal.insect",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#insect"
+        },
+        {
+          "const": "animal.rabbit",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#rabbit"
+        },
+        {
+          "const": "animal.rodent",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#rodent"
+        },
+        {
+          "const": "animal.type",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#type"
+        },
+        {
+          "const": "animal.petName",
+          "description": "Ref: https://fakerjs.dev/api/animal.html#petname"
+        },
+        {
+          "const": "book.author",
+          "description": "Ref: https://fakerjs.dev/api/book.html#author"
+        },
+        {
+          "const": "book.format",
+          "description": "Ref: https://fakerjs.dev/api/book.html#format"
+        },
+        {
+          "const": "book.genre",
+          "description": "Ref: https://fakerjs.dev/api/book.html#genre"
+        },
+        {
+          "const": "book.publisher",
+          "description": "Ref: https://fakerjs.dev/api/book.html#publisher"
+        },
+        {
+          "const": "book.series",
+          "description": "Ref: https://fakerjs.dev/api/book.html#series"
+        },
+        {
+          "const": "book.title",
+          "description": "Ref: https://fakerjs.dev/api/book.html#title"
+        },
+        {
+          "const": "color.human",
+          "description": "Ref: https://fakerjs.dev/api/color.html#human"
+        },
+        {
+          "const": "color.space",
+          "description": "Ref: https://fakerjs.dev/api/color.html#space"
+        },
+        {
+          "const": "color.cssSupportedFunction",
+          "description": "Ref: https://fakerjs.dev/api/color.html#csssupportedfunction"
+        },
+        {
+          "const": "color.cssSupportedSpace",
+          "description": "Ref: https://fakerjs.dev/api/color.html#csssupportedspace"
+        },
+        {
+          "const": "color.rgb",
+          "description": "Ref: https://fakerjs.dev/api/color.html#rgb"
+        },
+        {
+          "const": "color.cmyk",
+          "description": "Ref: https://fakerjs.dev/api/color.html#cmyk"
+        },
+        {
+          "const": "color.hsl",
+          "description": "Ref: https://fakerjs.dev/api/color.html#hsl"
+        },
+        {
+          "const": "color.hwb",
+          "description": "Ref: https://fakerjs.dev/api/color.html#hwb"
+        },
+        {
+          "const": "color.lab",
+          "description": "Ref: https://fakerjs.dev/api/color.html#lab"
+        },
+        {
+          "const": "color.lch",
+          "description": "Ref: https://fakerjs.dev/api/color.html#lch"
+        },
+        {
+          "const": "color.colorByCSSColorSpace",
+          "description": "Ref: https://fakerjs.dev/api/color.html#colorbycsscolorspace"
+        },
+        {
+          "const": "commerce.department",
+          "description": "Ref: https://fakerjs.dev/api/commerce.html#department"
+        },
+        {
+          "const": "commerce.productName",
+          "description": "Ref: https://fakerjs.dev/api/commerce.html#productname"
+        },
+        {
+          "const": "commerce.price",
+          "description": "Ref: https://fakerjs.dev/api/commerce.html#price"
+        },
+        {
+          "const": "commerce.productAdjective",
+          "description": "Ref: https://fakerjs.dev/api/commerce.html#productadjective"
+        },
+        {
+          "const": "commerce.productMaterial",
+          "description": "Ref: https://fakerjs.dev/api/commerce.html#productmaterial"
+        },
+        {
+          "const": "commerce.product",
+          "description": "Ref: https://fakerjs.dev/api/commerce.html#product"
+        },
+        {
+          "const": "commerce.productDescription",
+          "description": "Ref: https://fakerjs.dev/api/commerce.html#productdescription"
+        },
+        {
+          "const": "commerce.isbn",
+          "description": "Ref: https://fakerjs.dev/api/commerce.html#isbn"
+        },
+        {
+          "const": "company.name",
+          "description": "Ref: https://fakerjs.dev/api/company.html#name"
+        },
+        {
+          "const": "company.catchPhrase",
+          "description": "Ref: https://fakerjs.dev/api/company.html#catchphrase"
+        },
+        {
+          "const": "company.buzzPhrase",
+          "description": "Ref: https://fakerjs.dev/api/company.html#buzzphrase"
+        },
+        {
+          "const": "company.catchPhraseAdjective",
+          "description": "Ref: https://fakerjs.dev/api/company.html#catchphraseadjective"
+        },
+        {
+          "const": "company.catchPhraseDescriptor",
+          "description": "Ref: https://fakerjs.dev/api/company.html#catchphrasedescriptor"
+        },
+        {
+          "const": "company.catchPhraseNoun",
+          "description": "Ref: https://fakerjs.dev/api/company.html#catchphrasenoun"
+        },
+        {
+          "const": "company.buzzAdjective",
+          "description": "Ref: https://fakerjs.dev/api/company.html#buzzadjective"
+        },
+        {
+          "const": "company.buzzVerb",
+          "description": "Ref: https://fakerjs.dev/api/company.html#buzzverb"
+        },
+        {
+          "const": "company.buzzNoun",
+          "description": "Ref: https://fakerjs.dev/api/company.html#buzznoun"
+        },
+        {
+          "const": "database.column",
+          "description": "Ref: https://fakerjs.dev/api/database.html#column"
+        },
+        {
+          "const": "database.type",
+          "description": "Ref: https://fakerjs.dev/api/database.html#type"
+        },
+        {
+          "const": "database.collation",
+          "description": "Ref: https://fakerjs.dev/api/database.html#collation"
+        },
+        {
+          "const": "database.engine",
+          "description": "Ref: https://fakerjs.dev/api/database.html#engine"
+        },
+        {
+          "const": "database.mongodbObjectId",
+          "description": "Ref: https://fakerjs.dev/api/database.html#mongodbobjectid"
+        },
+        {
+          "const": "finance.accountNumber",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#accountnumber"
+        },
+        {
+          "const": "finance.accountName",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#accountname"
+        },
+        {
+          "const": "finance.routingNumber",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#routingnumber"
+        },
+        {
+          "const": "finance.maskedNumber",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#maskednumber"
+        },
+        {
+          "const": "finance.amount",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#amount"
+        },
+        {
+          "const": "finance.transactionType",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#transactiontype"
+        },
+        {
+          "const": "finance.currency",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#currency"
+        },
+        {
+          "const": "finance.currencyCode",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#currencycode"
+        },
+        {
+          "const": "finance.currencyName",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#currencyname"
+        },
+        {
+          "const": "finance.currencySymbol",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#currencysymbol"
+        },
+        {
+          "const": "finance.currencyNumericCode",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#currencynumericcode"
+        },
+        {
+          "const": "finance.bitcoinAddress",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#bitcoinaddress"
+        },
+        {
+          "const": "finance.litecoinAddress",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#litecoinaddress"
+        },
+        {
+          "const": "finance.creditCardNumber",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#creditcardnumber"
+        },
+        {
+          "const": "finance.creditCardCVV",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#creditcardcvv"
+        },
+        {
+          "const": "finance.creditCardIssuer",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#creditcardissuer"
+        },
+        {
+          "const": "finance.pin",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#pin"
+        },
+        {
+          "const": "finance.ethereumAddress",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#ethereumaddress"
+        },
+        {
+          "const": "finance.iban",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#iban"
+        },
+        {
+          "const": "finance.bic",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#bic"
+        },
+        {
+          "const": "finance.transactionDescription",
+          "description": "Ref: https://fakerjs.dev/api/finance.html#transactiondescription"
+        },
+        {
+          "const": "food.adjective",
+          "description": "Ref: https://fakerjs.dev/api/food.html#adjective"
+        },
+        {
+          "const": "food.description",
+          "description": "Ref: https://fakerjs.dev/api/food.html#description"
+        },
+        {
+          "const": "food.dish",
+          "description": "Ref: https://fakerjs.dev/api/food.html#dish"
+        },
+        {
+          "const": "food.ethnicCategory",
+          "description": "Ref: https://fakerjs.dev/api/food.html#ethniccategory"
+        },
+        {
+          "const": "food.fruit",
+          "description": "Ref: https://fakerjs.dev/api/food.html#fruit"
+        },
+        {
+          "const": "food.ingredient",
+          "description": "Ref: https://fakerjs.dev/api/food.html#ingredient"
+        },
+        {
+          "const": "food.meat",
+          "description": "Ref: https://fakerjs.dev/api/food.html#meat"
+        },
+        {
+          "const": "food.spice",
+          "description": "Ref: https://fakerjs.dev/api/food.html#spice"
+        },
+        {
+          "const": "food.vegetable",
+          "description": "Ref: https://fakerjs.dev/api/food.html#vegetable"
+        },
+        {
+          "const": "git.branch",
+          "description": "Ref: https://fakerjs.dev/api/git.html#branch"
+        },
+        {
+          "const": "git.commitEntry",
+          "description": "Ref: https://fakerjs.dev/api/git.html#commitentry"
+        },
+        {
+          "const": "git.commitMessage",
+          "description": "Ref: https://fakerjs.dev/api/git.html#commitmessage"
+        },
+        {
+          "const": "git.commitDate",
+          "description": "Ref: https://fakerjs.dev/api/git.html#commitdate"
+        },
+        {
+          "const": "git.commitSha",
+          "description": "Ref: https://fakerjs.dev/api/git.html#commitsha"
+        },
+        {
+          "const": "hacker.abbreviation",
+          "description": "Ref: https://fakerjs.dev/api/hacker.html#abbreviation"
+        },
+        {
+          "const": "hacker.adjective",
+          "description": "Ref: https://fakerjs.dev/api/hacker.html#adjective"
+        },
+        {
+          "const": "hacker.noun",
+          "description": "Ref: https://fakerjs.dev/api/hacker.html#noun"
+        },
+        {
+          "const": "hacker.verb",
+          "description": "Ref: https://fakerjs.dev/api/hacker.html#verb"
+        },
+        {
+          "const": "hacker.ingverb",
+          "description": "Ref: https://fakerjs.dev/api/hacker.html#ingverb"
+        },
+        {
+          "const": "hacker.phrase",
+          "description": "Ref: https://fakerjs.dev/api/hacker.html#phrase"
+        },
+        {
+          "const": "image.avatar",
+          "description": "Ref: https://fakerjs.dev/api/image.html#avatar"
+        },
+        {
+          "const": "image.avatarGitHub",
+          "description": "Ref: https://fakerjs.dev/api/image.html#avatargithub"
+        },
+        {
+          "const": "image.personPortrait",
+          "description": "Ref: https://fakerjs.dev/api/image.html#personportrait"
+        },
+        {
+          "const": "image.avatarLegacy",
+          "description": "Ref: https://fakerjs.dev/api/image.html#avatarlegacy"
+        },
+        {
+          "const": "image.url",
+          "description": "Ref: https://fakerjs.dev/api/image.html#url"
+        },
+        {
+          "const": "image.urlLoremFlickr",
+          "description": "Ref: https://fakerjs.dev/api/image.html#urlloremflickr"
+        },
+        {
+          "const": "image.urlPicsumPhotos",
+          "description": "Ref: https://fakerjs.dev/api/image.html#urlpicsumphotos"
+        },
+        {
+          "const": "image.urlPlaceholder",
+          "description": "Ref: https://fakerjs.dev/api/image.html#urlplaceholder"
+        },
+        {
+          "const": "image.dataUri",
+          "description": "Ref: https://fakerjs.dev/api/image.html#datauri"
+        },
+        {
+          "const": "internet.email",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#email"
+        },
+        {
+          "const": "internet.exampleEmail",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#exampleemail"
+        },
+        {
+          "const": "internet.userName",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#username"
+        },
+        {
+          "const": "internet.username",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#username"
+        },
+        {
+          "const": "internet.displayName",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#displayname"
+        },
+        {
+          "const": "internet.protocol",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#protocol"
+        },
+        {
+          "const": "internet.httpMethod",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#httpmethod"
+        },
+        {
+          "const": "internet.httpStatusCode",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#httpstatuscode"
+        },
+        {
+          "const": "internet.url",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#url"
+        },
+        {
+          "const": "internet.domainName",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#domainname"
+        },
+        {
+          "const": "internet.domainSuffix",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#domainsuffix"
+        },
+        {
+          "const": "internet.domainWord",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#domainword"
+        },
+        {
+          "const": "internet.ip",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#ip"
+        },
+        {
+          "const": "internet.ipv4",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#ipv4"
+        },
+        {
+          "const": "internet.ipv6",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#ipv6"
+        },
+        {
+          "const": "internet.port",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#port"
+        },
+        {
+          "const": "internet.userAgent",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#useragent"
+        },
+        {
+          "const": "internet.color",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#color"
+        },
+        {
+          "const": "internet.mac",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#mac"
+        },
+        {
+          "const": "internet.password",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#password"
+        },
+        {
+          "const": "internet.emoji",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#emoji"
+        },
+        {
+          "const": "internet.jwtAlgorithm",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#jwtalgorithm"
+        },
+        {
+          "const": "internet.jwt",
+          "description": "Ref: https://fakerjs.dev/api/internet.html#jwt"
+        },
+        {
+          "const": "lorem.word",
+          "description": "Ref: https://fakerjs.dev/api/lorem.html#word"
+        },
+        {
+          "const": "lorem.words",
+          "description": "Ref: https://fakerjs.dev/api/lorem.html#words"
+        },
+        {
+          "const": "lorem.sentence",
+          "description": "Ref: https://fakerjs.dev/api/lorem.html#sentence"
+        },
+        {
+          "const": "lorem.slug",
+          "description": "Ref: https://fakerjs.dev/api/lorem.html#slug"
+        },
+        {
+          "const": "lorem.sentences",
+          "description": "Ref: https://fakerjs.dev/api/lorem.html#sentences"
+        },
+        {
+          "const": "lorem.paragraph",
+          "description": "Ref: https://fakerjs.dev/api/lorem.html#paragraph"
+        },
+        {
+          "const": "lorem.paragraphs",
+          "description": "Ref: https://fakerjs.dev/api/lorem.html#paragraphs"
+        },
+        {
+          "const": "lorem.text",
+          "description": "Ref: https://fakerjs.dev/api/lorem.html#text"
+        },
+        {
+          "const": "lorem.lines",
+          "description": "Ref: https://fakerjs.dev/api/lorem.html#lines"
+        },
+        {
+          "const": "music.album",
+          "description": "Ref: https://fakerjs.dev/api/music.html#album"
+        },
+        {
+          "const": "music.artist",
+          "description": "Ref: https://fakerjs.dev/api/music.html#artist"
+        },
+        {
+          "const": "music.genre",
+          "description": "Ref: https://fakerjs.dev/api/music.html#genre"
+        },
+        {
+          "const": "music.songName",
+          "description": "Ref: https://fakerjs.dev/api/music.html#songname"
+        },
+        {
+          "const": "person.firstName",
+          "description": "Ref: https://fakerjs.dev/api/person.html#firstname"
+        },
+        {
+          "const": "person.lastName",
+          "description": "Ref: https://fakerjs.dev/api/person.html#lastname"
+        },
+        {
+          "const": "person.middleName",
+          "description": "Ref: https://fakerjs.dev/api/person.html#middlename"
+        },
+        {
+          "const": "person.fullName",
+          "description": "Ref: https://fakerjs.dev/api/person.html#fullname"
+        },
+        {
+          "const": "person.gender",
+          "description": "Ref: https://fakerjs.dev/api/person.html#gender"
+        },
+        {
+          "const": "person.sex",
+          "description": "Ref: https://fakerjs.dev/api/person.html#sex"
+        },
+        {
+          "const": "person.sexType",
+          "description": "Ref: https://fakerjs.dev/api/person.html#sextype"
+        },
+        {
+          "const": "person.bio",
+          "description": "Ref: https://fakerjs.dev/api/person.html#bio"
+        },
+        {
+          "const": "person.prefix",
+          "description": "Ref: https://fakerjs.dev/api/person.html#prefix"
+        },
+        {
+          "const": "person.suffix",
+          "description": "Ref: https://fakerjs.dev/api/person.html#suffix"
+        },
+        {
+          "const": "person.jobTitle",
+          "description": "Ref: https://fakerjs.dev/api/person.html#jobtitle"
+        },
+        {
+          "const": "person.jobDescriptor",
+          "description": "Ref: https://fakerjs.dev/api/person.html#jobdescriptor"
+        },
+        {
+          "const": "person.jobArea",
+          "description": "Ref: https://fakerjs.dev/api/person.html#jobarea"
+        },
+        {
+          "const": "person.jobType",
+          "description": "Ref: https://fakerjs.dev/api/person.html#jobtype"
+        },
+        {
+          "const": "person.zodiacSign",
+          "description": "Ref: https://fakerjs.dev/api/person.html#zodiacsign"
+        },
+        {
+          "const": "phone.number",
+          "description": "Ref: https://fakerjs.dev/api/phone.html#number"
+        },
+        {
+          "const": "phone.imei",
+          "description": "Ref: https://fakerjs.dev/api/phone.html#imei"
+        },
+        {
+          "const": "science.chemicalElement",
+          "description": "Ref: https://fakerjs.dev/api/science.html#chemicalelement"
+        },
+        {
+          "const": "science.unit",
+          "description": "Ref: https://fakerjs.dev/api/science.html#unit"
+        },
+        {
+          "const": "system.fileName",
+          "description": "Ref: https://fakerjs.dev/api/system.html#filename"
+        },
+        {
+          "const": "system.commonFileName",
+          "description": "Ref: https://fakerjs.dev/api/system.html#commonfilename"
+        },
+        {
+          "const": "system.mimeType",
+          "description": "Ref: https://fakerjs.dev/api/system.html#mimetype"
+        },
+        {
+          "const": "system.commonFileType",
+          "description": "Ref: https://fakerjs.dev/api/system.html#commonfiletype"
+        },
+        {
+          "const": "system.commonFileExt",
+          "description": "Ref: https://fakerjs.dev/api/system.html#commonfileext"
+        },
+        {
+          "const": "system.fileType",
+          "description": "Ref: https://fakerjs.dev/api/system.html#filetype"
+        },
+        {
+          "const": "system.fileExt",
+          "description": "Ref: https://fakerjs.dev/api/system.html#fileext"
+        },
+        {
+          "const": "system.directoryPath",
+          "description": "Ref: https://fakerjs.dev/api/system.html#directorypath"
+        },
+        {
+          "const": "system.filePath",
+          "description": "Ref: https://fakerjs.dev/api/system.html#filepath"
+        },
+        {
+          "const": "system.semver",
+          "description": "Ref: https://fakerjs.dev/api/system.html#semver"
+        },
+        {
+          "const": "system.networkInterface",
+          "description": "Ref: https://fakerjs.dev/api/system.html#networkinterface"
+        },
+        {
+          "const": "system.cron",
+          "description": "Ref: https://fakerjs.dev/api/system.html#cron"
+        },
+        {
+          "const": "vehicle.vehicle",
+          "description": "Ref: https://fakerjs.dev/api/vehicle.html#vehicle"
+        },
+        {
+          "const": "vehicle.manufacturer",
+          "description": "Ref: https://fakerjs.dev/api/vehicle.html#manufacturer"
+        },
+        {
+          "const": "vehicle.model",
+          "description": "Ref: https://fakerjs.dev/api/vehicle.html#model"
+        },
+        {
+          "const": "vehicle.type",
+          "description": "Ref: https://fakerjs.dev/api/vehicle.html#type"
+        },
+        {
+          "const": "vehicle.fuel",
+          "description": "Ref: https://fakerjs.dev/api/vehicle.html#fuel"
+        },
+        {
+          "const": "vehicle.vin",
+          "description": "Ref: https://fakerjs.dev/api/vehicle.html#vin"
+        },
+        {
+          "const": "vehicle.color",
+          "description": "Ref: https://fakerjs.dev/api/vehicle.html#color"
+        },
+        {
+          "const": "vehicle.vrm",
+          "description": "Ref: https://fakerjs.dev/api/vehicle.html#vrm"
+        },
+        {
+          "const": "vehicle.bicycle",
+          "description": "Ref: https://fakerjs.dev/api/vehicle.html#bicycle"
+        },
+        {
+          "const": "word.adjective",
+          "description": "Ref: https://fakerjs.dev/api/word.html#adjective"
+        },
+        {
+          "const": "word.adverb",
+          "description": "Ref: https://fakerjs.dev/api/word.html#adverb"
+        },
+        {
+          "const": "word.conjunction",
+          "description": "Ref: https://fakerjs.dev/api/word.html#conjunction"
+        },
+        {
+          "const": "word.interjection",
+          "description": "Ref: https://fakerjs.dev/api/word.html#interjection"
+        },
+        {
+          "const": "word.noun",
+          "description": "Ref: https://fakerjs.dev/api/word.html#noun"
+        },
+        {
+          "const": "word.preposition",
+          "description": "Ref: https://fakerjs.dev/api/word.html#preposition"
+        },
+        {
+          "const": "word.verb",
+          "description": "Ref: https://fakerjs.dev/api/word.html#verb"
+        },
+        {
+          "const": "word.sample",
+          "description": "Ref: https://fakerjs.dev/api/word.html#sample"
+        },
+        {
+          "const": "word.words",
+          "description": "Ref: https://fakerjs.dev/api/word.html#words"
+        }
+      ]
     }
   }
-  
+}
